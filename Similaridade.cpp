@@ -1,5 +1,5 @@
 /****
- * Implementação do módulo: main
+ * Implementação do módulo: similaridade
  * Autores: Cecília Candeia e Matheus Fernandes
  * Data de Criação: 13/11/2026
  * Última alteração: xx/11/2026
