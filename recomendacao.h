@@ -4,7 +4,7 @@
 #include "listaCompras.h"
 #include "similaridade.h"
 
-using namepace std;
+using namespace std;
 
 typedef struct{
     int produto; // acho melhor guardar como int!
