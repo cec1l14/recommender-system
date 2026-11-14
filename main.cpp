@@ -13,36 +13,45 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        printf("Arquivo usado: %s <arquivo.csv>\n", argv[0]);
+    if (argc < 4) {
+        printf("Uso:\n");
+        printf("  %s 1 <codigoCliente> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
+        printf("  %s 2 <indiceCliente> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
+        printf("  %s 3 <codigoCliente> <k> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
+        return 1;
+    }
+
+    int opcao = atoi(argv[1]);
+    int primeiroArquivo;
+
+    if (opcao == 1 || opcao == 2) {
+        primeiroArquivo = 3;
+    } else if (opcao == 3) {
+        primeiroArquivo = 4;
+    } else {
+        printf("Opcao invalida\n");
+        return 1;
+    }
+
+    if (argc <= primeiroArquivo) {
+        printf("Faltam argumentos.\n");
         return 1;
     }
 
     ListaCompras lista;
-    if (leituraCSV(argv[1], &lista) != 0) {
-        return 1;
-    }
-
-    int opcao = -1;
-
-    while(opcao != 0){
-        printf("Sistema de Recomendacao\n");
-        printf("Opcao 1 - Testar listaCompras\n");
-        printf("Opcao 2 - Testar Similaridade \n");
-        printf("Opcao 3 - Testar Recomendacao\n");
-        printf("Opcao 0 - sair da execucao\n");
-        printf("Opcao a ser escolhida: \n");
-        scanf("%d", &opcao);
-
-        if((opcao > 3) || (opcao < 0)){
-            printf("Opcao invalida\n");
-        } if(opcao == 1){
-            testarListaCompras(&lista);
-        } if(opcao == 2){
-            testarSimilaridade(&lista);
-        } if(opcao == 3){
-            testarRecomendacao(&lista);
+    for (int i = primeiroArquivo; i < argc; i++) {
+        if (leituraCSV(argv[i], &lista) != 0) {
+            return 1;
         }
     }
-    return 0; 
+
+    if (opcao == 1) {
+        testarListaCompras(&lista, argv[2]);
+    } else if (opcao == 2) {
+        testarSimilaridade(&lista, atoi(argv[2]));
+    } else {
+        testarRecomendacao(&lista, argv[2], atoi(argv[3]));
+    }
+
+    return 0;
 }

@@ -14,6 +14,6 @@ float dizSimilaridade(float **matrizSimilaridade, int clienteA, int clienteB, Li
 void liberdadeMatriz(int **matriz, int linhas);
 void liberdadeMatrizFloat(float **matriz, int linhas);
 
-void testarSimilaridade(ListaCompras *lista);
+void testarSimilaridade(ListaCompras *lista, int indice);
 
 #endif

@@ -173,7 +173,7 @@ vector<int> recomendaProdutos(float **matrizSimilaridade, int cliente, int k, Li
     return recomendados;
 }
 
-void testarRecomendacao(ListaCompras *lista){
+void testarRecomendacao(ListaCompras *lista, char *codigo, int k){
     int clientes = lista->vectorClientes.size();
     int produtos = lista->vectorProdutos.size();
 
@@ -181,31 +181,21 @@ void testarRecomendacao(ListaCompras *lista){
     int **matrizTransposta = criaMatrizTransposta(matrizCompras, lista);
     int **matrizInterseccao = criaInterseccao(matrizCompras, matrizTransposta, lista);
     float **matrizSimilaridade = criaMatrizSimilaridade(matrizInterseccao, lista);
+    
+    if (lista->mapClientes.find(codigo) == lista->mapClientes.end()) {
+        printf("Cliente nao encontrado.\n");
+    } else {
+        int indice = lista->mapClientes[codigo];
+        vector<int> recomendados = recomendaProdutos(matrizSimilaridade, indice, k, lista);
 
-    char codigo[20];
-    int i, k;
-
-    for(i=0; i<3; i++){
-        printf("Informe o codigo do cliente: \n");
-        scanf("%19s", codigo);
-
-        printf("Informe a quantidade de elementos: \n");
-        scanf("%d", &k);
-
-        if (lista->mapClientes.find(codigo) == lista->mapClientes.end()) {
-            printf("Cliente nao encontrado.\n");
-        } else {
-            int indice = lista->mapClientes[codigo];
-            vector<int> recomendados = recomendaProdutos(matrizSimilaridade, indice, k, lista);
-
-            if (recomendados.size() == 0) {
-                printf("Nenhum produto para recomendar.\n");
-            }
-            for (int p : recomendados) {
-                cout << lista->vectorProdutos[p] << endl;
-            }
+        if (recomendados.size() == 0) {
+            printf("Nenhum produto para recomendar.\n");
+        }
+        for (int p : recomendados) {
+            cout << lista->vectorProdutos[p] << endl;
+        }
     }
-    }
+
     liberdadeMatriz(matrizCompras, clientes);
     liberdadeMatriz(matrizTransposta, produtos);
     liberdadeMatriz(matrizInterseccao, clientes);

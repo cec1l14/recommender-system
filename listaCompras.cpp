@@ -86,21 +86,13 @@ int leituraCSV(char *arquivo, ListaCompras *lista){
     return 0;
 }
 
-void testarListaCompras(ListaCompras *lista){
-    char codigo[20];
-    int i;
-
-    for (i = 0; i < 3; i++) {
-        printf("Codigo do cliente: ");
-        scanf("%19s", codigo);
-
-        if (lista->mapClientes.find(codigo) == lista->mapClientes.end()) {
-            printf("Cliente nao encontrado.\n");
-        } else {
-            int indice = lista->mapClientes[codigo];
-            for (int p : lista->listCompras[indice]) {
-                cout << lista->vectorProdutos[p] << endl;
-            }
+void testarListaCompras(ListaCompras *lista, char *codigo){
+    if (lista->mapClientes.find(codigo) == lista->mapClientes.end()) {
+        printf("Cliente nao encontrado.\n");
+    } else {
+        int indice = lista->mapClientes[codigo];
+        for (int p : lista->listCompras[indice]) {
+            cout << lista->vectorProdutos[p] << endl;
         }
     }
 }
