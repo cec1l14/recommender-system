@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "listaCompras.h"
 #include "similaridade.h"
+#include "recomendacao.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -39,6 +40,8 @@ int main(int argc, char *argv[]) {
             testarListaCompras(&lista);
         } if(opcao == 2){
             testarSimilaridade(&lista);
+        } if(opcao == 3){
+            testarRecomendacao(&lista);
         }
     }
     return 0; 
