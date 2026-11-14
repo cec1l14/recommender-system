@@ -131,3 +131,38 @@ void liberdadeMatriz(int **matriz, int linhas) {
     }
     free(matriz);
 }
+
+void liberdadeMatrizFloat(float **matriz, int linhas){
+    for (int i = 0; i < linhas; i++) {
+        free(matriz[i]);
+    }
+    free(matriz);
+}
+
+void testarSimilaridade(ListaCompras *lista){
+    int clientes = lista->vectorClientes.size();
+    int produtos = lista->vectorProdutos.size();
+
+    int **matrizCompras = criaMatrizCompras(lista);
+    int **matrizTransposta = criaMatrizTransposta(matrizCompras, lista);
+    int **matrizInterseccao = criaInterseccao(matrizCompras, matrizTransposta, lista);
+    float **matrizSimilaridade = criaMatrizSimilaridade(matrizInterseccao, lista);
+
+    int indice;
+    printf("Escolha o indice referente ao cliente (0 a %d): \n", clientes - 1);
+    scanf("%d", &indice);
+
+    int match = matchClientes(matrizSimilaridade, indice, lista);
+
+    if(match == -1){
+        printf("Nao ha similaridade.\n");
+    } else {
+        printf("Cliente mais similar: %d, com similaridade = %.3f\n", match,
+        dizSimilaridade(matrizSimilaridade, indice, match, lista));
+    }
+
+    liberdadeMatriz(matrizCompras, clientes);
+    liberdadeMatriz(matrizInterseccao, clientes);
+    liberdadeMatriz(matrizTransposta, produtos);
+    liberdadeMatrizFloat(matrizSimilaridade, clientes);
+}

@@ -27,8 +27,8 @@ int main(int argc, char *argv[]) {
     while(opcao != 0){
         printf("Sistema de Recomendacao\n");
         printf("Opcao 1 - Testar listaCompras\n");
-        printf("Opcao 2 - \n");
-        printf("Opcao 3 - \n");
+        printf("Opcao 2 - Testar Similaridade \n");
+        printf("Opcao 3 - Testar Recomendacao\n");
         printf("Opcao 0 - sair da execucao\n");
         printf("Opcao a ser escolhida: \n");
         scanf("%d", &opcao);
@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
             printf("Opcao invalida\n");
         } if(opcao == 1){
             testarListaCompras(&lista);
+        } if(opcao == 2){
+            testarSimilaridade(&lista);
         }
     }
     return 0; 
