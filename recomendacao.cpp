@@ -15,8 +15,6 @@
 
 using namespace std;
 
-using namespace std;
-
 bool compararPorRanking(const Ranking &a, const Ranking &b){
     return a.valor < b.valor;
 }
