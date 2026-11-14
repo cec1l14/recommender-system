@@ -146,7 +146,31 @@ Ranking *listaCandidatos = (Ranking *) malloc(candidatos * sizeof(Ranking));
 }
 
 vector<int> recomendaProdutos(float **matrizSimilaridade, int cliente, int k, ListaCompras *lista){
-    
+    vector<int> recomendados;
+
+    int clientes = lista->vectorClientes.size();
+    if (cliente < 0 || cliente >= clientes) {
+        return recomendados; // vector vazio quando nao ha clientes encontrados
+    }
+
+    int numVizinhos = 0;
+    int numCandidatos = 0;
+
+    int *listaVizinhos = criaListaVizinhos(matrizSimilaridade, cliente, &numVizinhos, lista);
+    Ranking *rank = criaVetorRanqueamento(lista);
+    dizRank(rank, matrizSimilaridade, cliente, listaVizinhos, numVizinhos, lista);
+    Ranking *listaCandidatos = criaListaCandidatos(rank, &numCandidatos, lista);
+
+    int i;
+    for (i=0; i<k; i++) {
+        recomendados.push_back(listaCandidatos[i].produto);
+    }
+
+    free(listaVizinhos);
+    free(rank);
+    free(listaCandidatos);
+
+    return recomendados;
 }
 
 void testarRecomendacao(ListaCompras *lista){
@@ -159,11 +183,11 @@ void testarRecomendacao(ListaCompras *lista){
     float **matrizSimilaridade = criaMatrizSimilaridade(matrizInterseccao, lista);
 
     char codigo[20];
-    int i, j, k;
+    int i, k;
 
     for(i=0; i<3; i++){
         printf("Informe o codigo do cliente: \n");
-        scanf("%19s", &codigo);
+        scanf("%19s", codigo);
 
         printf("Informe a quantidade de elementos: \n");
         scanf("%d", &k);
