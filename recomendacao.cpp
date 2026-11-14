@@ -3,7 +3,7 @@
  * Autores: Cecília Candeia e Matheus Fernandes
  * Data de Criação: 14/11/2026
  * Última alteração: xx/11/2026
- * Descrição Geral: 
+ * Descrição Geral: contém funções para recomendação de produtos a partir da similaridade entre clientes, criação de listas de vizinhos, ranqueamento e recomendação de produtos. 
  ****/
 
 #include <iostream>
@@ -181,7 +181,7 @@ void testarRecomendacao(ListaCompras *lista, char *codigo, int k){
     int **matrizTransposta = criaMatrizTransposta(matrizCompras, lista);
     int **matrizInterseccao = criaInterseccao(matrizCompras, matrizTransposta, lista);
     float **matrizSimilaridade = criaMatrizSimilaridade(matrizInterseccao, lista);
-    
+
     if (lista->mapClientes.find(codigo) == lista->mapClientes.end()) {
         printf("Cliente nao encontrado.\n");
     } else {
