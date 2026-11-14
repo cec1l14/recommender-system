@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "listaCompras.h"
+#include "similaridade.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {

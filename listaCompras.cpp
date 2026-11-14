@@ -39,7 +39,6 @@ int leituraCSV(char *arquivo, ListaCompras *lista){
                 lista->vectorProdutos.push_back(nome);
             }
         } else{
-            printf("Erro ao ler a linha atual");
             fscanf(f, "%*[^\n]");
         }
 
