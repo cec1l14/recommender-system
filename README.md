@@ -16,10 +16,11 @@ Em suma, o projeto, até agora, está dividido em três implementações básica
 recommender-system/
 ├── README.md
 ├── LICENSE
-├── main.cpp
-├── listaCompras.cpp / listaCompras.h
-├── similaridade.cpp / similaridade.h
-├── recomendacao.cpp / recomendacao.h
+├── src/
+│   ├── main.cpp
+│   ├── listaCompras.cpp / listaCompras.h
+│   ├── similaridade.cpp / similaridade.h
+│   └── recomendacao.cpp / recomendacao.h
 └── data/
     └── dados_venda_cluster_*.csv
 ```
@@ -69,7 +70,7 @@ git clone https://github.com/cec1l14/recommender-system.git
 É necessário um compilador C++ com suporte a C++11, como o `g++`.
 
 ```bash
-cd recommender-system
+cd recommender-system/src
 g++ -std=c++11 -Wall -o a.exe *.cpp
 ```
 
