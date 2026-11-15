@@ -99,9 +99,9 @@ Módulo Recomendação (mostra os `k` produtos recomendados para 3 clientes, pel
 Exemplos:
 
 ```bash
-.\a.exe 1 99EIP501 99PXGH01 99BVWE01 data\dados_venda_cluster_1.csv
-.\a.exe 2 0 data\dados_venda_cluster_1.csv
-.\a.exe 3 5 99EIP501 99PXGH01 99BVWE01 data\dados_venda_cluster_1.csv
+.\a.exe 1 99EIP501 99PXGH01 99BVWE01 ..\data\dados_venda_cluster_1.csv
+.\a.exe 2 0 ..\data\dados_venda_cluster_1.csv
+.\a.exe 3 5 99EIP501 99PXGH01 99BVWE01 ..\data\dados_venda_cluster_1.csv
 ```
 
 Aparecerão os nomes dos produtos comprados (opção 1) ou dos 5 produtos recomendados (opção 3) para cada um dos 3 clientes. Se algum código não existir nos arquivos, é exibida a mensagem `Cliente nao encontrado.`
