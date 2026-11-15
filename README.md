@@ -70,17 +70,17 @@ git clone https://github.com/cec1l14/recommender-system.git
 
 ```bash
 cd recommender-system
-g++ -std=c++11 -Wall -o a.exe main.cpp listaCompras.cpp similaridade.cpp recomendacao.cpp
+g++ -std=c++11 -Wall -o a.exe *.cpp
 ```
 
 ## Como executar
 
 O primeiro argumento escolhe o módulo a testar, e os arquivos CSV vêm sempre no final (pode-se passar mais de um).
 
-Módulo Lista de Compras (mostra os produtos comprados por um cliente):
+Módulo Lista de Compras (mostra os produtos comprados por 3 clientes, pelos códigos originais):
 
 ```bash
-.\a.exe 1 <codigoCliente> <arquivo1.csv> [arquivo2.csv ...]
+.\a.exe 1 <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]
 ```
 
 Módulo Similaridade (mostra o cliente mais similar, pelo índice interno):
@@ -89,17 +89,21 @@ Módulo Similaridade (mostra o cliente mais similar, pelo índice interno):
 .\a.exe 2 <indiceCliente> <arquivo1.csv> [arquivo2.csv ...]
 ```
 
-Módulo Recomendação (mostra os `k` produtos recomendados):
+Módulo Recomendação (mostra os `k` produtos recomendados para 3 clientes, pelos códigos originais):
 
 ```bash
-.\a.exe 3 <codigoCliente> <k> <arquivo1.csv> [arquivo2.csv ...]
+.\a.exe 3 <k> <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]
 ```
 
-Exemplo:
+Exemplos:
 
 ```bash
-.\a.exe 3 99EIP501 5 data\dados_venda_cluster_1.csv
+.\a.exe 1 99EIP501 99PXGH01 99BVWE01 data\dados_venda_cluster_1.csv
+.\a.exe 2 0 data\dados_venda_cluster_1.csv
+.\a.exe 3 5 99EIP501 99PXGH01 99BVWE01 data\dados_venda_cluster_1.csv
 ```
+
+Aparecerão os nomes dos produtos comprados (opção 1) ou dos 5 produtos recomendados (opção 3) para cada um dos 3 clientes. Se algum código não existir nos arquivos, é exibida a mensagem `Cliente nao encontrado.`
 
 ## Integrantes
 
