@@ -162,7 +162,7 @@ vector<int> recomendaProdutos(float **matrizSimilaridade, int cliente, int k, Li
     Ranking *listaCandidatos = criaListaCandidatos(rank, &numCandidatos, lista);
 
     int i;
-    for (i=0; i<k; i++) {
+    for (i = 0; i < k && i < numCandidatos; i++) {
         recomendados.push_back(listaCandidatos[i].produto);
     }
 
