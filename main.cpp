@@ -7,6 +7,7 @@
  ****/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "listaCompras.h"
 #include "similaridade.h"
 #include "recomendacao.h"
@@ -15,19 +16,21 @@ using namespace std;
 int main(int argc, char *argv[]) {
     if (argc < 4) {
         printf("Uso:\n");
-        printf("  %s 1 <codigoCliente> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
+        printf("  %s 1 <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
         printf("  %s 2 <indiceCliente> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
-        printf("  %s 3 <codigoCliente> <k> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
+        printf("  %s 3 <k> <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
         return 1;
     }
 
     int opcao = atoi(argv[1]);
     int primeiroArquivo;
 
-    if (opcao == 1 || opcao == 2) {
+    if (opcao == 1) {
+        primeiroArquivo = 5;
+    } else if (opcao == 2) {
         primeiroArquivo = 3;
     } else if (opcao == 3) {
-        primeiroArquivo = 4;
+        primeiroArquivo = 6;
     } else {
         printf("Opcao invalida\n");
         return 1;
@@ -46,11 +49,11 @@ int main(int argc, char *argv[]) {
     }
 
     if (opcao == 1) {
-        testarListaCompras(&lista, argv[2]);
+        testarListaCompras(&lista, &argv[2]);
     } else if (opcao == 2) {
         testarSimilaridade(&lista, atoi(argv[2]));
     } else {
-        testarRecomendacao(&lista, argv[2], atoi(argv[3]));
+        testarRecomendacao(&lista, atoi(argv[2]), &argv[3]);
     }
 
     return 0;

@@ -17,6 +17,6 @@ void dizRank(Ranking *rank, float **matrizSimilaridade, int cliente, int *listaV
 bool comparaRank(Ranking a, Ranking b);
 Ranking *criaListaCandidatos(Ranking *rank, int *numCandidatos, ListaCompras *lista);
 vector<int> recomendaProdutos(float **matrizSimilaridade, int cliente, int k, ListaCompras *lista);
-void testarRecomendacao(ListaCompras *lista, char *codigo, int k);
+void testarRecomendacao(ListaCompras *lista, int k, char *codigos[]);
 
 #endif 

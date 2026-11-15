@@ -15,6 +15,6 @@ typedef struct{
 } ListaCompras;
 
 int leituraCSV(char *arquivo, ListaCompras *lista);
-void testarListaCompras(ListaCompras *lista, char *codigo);
+void testarListaCompras(ListaCompras *lista, char *codigos[]);
 
 #endif

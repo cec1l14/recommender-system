@@ -173,7 +173,8 @@ vector<int> recomendaProdutos(float **matrizSimilaridade, int cliente, int k, Li
     return recomendados;
 }
 
-void testarRecomendacao(ListaCompras *lista, char *codigo, int k){
+// codigos: vetor com os códigos originais de 3 clientes
+void testarRecomendacao(ListaCompras *lista, int k, char *codigos[]){
     int clientes = lista->vectorClientes.size();
     int produtos = lista->vectorProdutos.size();
 
@@ -182,17 +183,23 @@ void testarRecomendacao(ListaCompras *lista, char *codigo, int k){
     int **matrizInterseccao = criaInterseccao(matrizCompras, matrizTransposta, lista);
     float **matrizSimilaridade = criaMatrizSimilaridade(matrizInterseccao, lista);
 
-    if (lista->mapClientes.find(codigo) == lista->mapClientes.end()) {
-        printf("Cliente nao encontrado.\n");
-    } else {
-        int indice = lista->mapClientes[codigo];
-        vector<int> recomendados = recomendaProdutos(matrizSimilaridade, indice, k, lista);
+    int i;
 
-        if (recomendados.size() == 0) {
-            printf("Nenhum produto para recomendar.\n");
-        }
-        for (int p : recomendados) {
-            cout << lista->vectorProdutos[p] << endl;
+    for (i = 0; i < 3; i++) {
+        printf("Cliente %s:\n", codigos[i]);
+
+        if (lista->mapClientes.find(codigos[i]) == lista->mapClientes.end()) {
+            printf("Cliente nao encontrado.\n");
+        } else {
+            int indice = lista->mapClientes[codigos[i]];
+            vector<int> recomendados = recomendaProdutos(matrizSimilaridade, indice, k, lista);
+
+            if (recomendados.size() == 0) {
+                printf("Nenhum produto para recomendar.\n");
+            }
+            for (int p : recomendados) {
+                cout << lista->vectorProdutos[p] << endl;
+            }
         }
     }
 
