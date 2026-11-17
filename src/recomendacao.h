@@ -14,7 +14,7 @@ typedef struct{
 int *criaListaVizinhos(float **matrizSimilaridade, int cliente, int *numVizinhos, ListaCompras *lista);
 Ranking *criaVetorRanqueamento(ListaCompras *lista);
 void dizRank(Ranking *rank, float **matrizSimilaridade, int cliente, int *listaVizinhos, int numVizinhos, ListaCompras *lista);
-bool comparaRank(Ranking a, Ranking b);
+bool comparaRank(const Ranking &a, const Ranking &b);
 Ranking *criaListaCandidatos(Ranking *rank, int *numCandidatos, ListaCompras *lista);
 vector<int> recomendaProdutos(float **matrizSimilaridade, int cliente, int k, ListaCompras *lista);
 void testarRecomendacao(ListaCompras *lista, int k, char *codigos[]);

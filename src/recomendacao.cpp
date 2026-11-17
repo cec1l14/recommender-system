@@ -28,6 +28,9 @@ int *criaListaVizinhos(float **matrizSimilaridade, int cliente, int *numVizinhos
     
     int vizinhos = 0;
     for (int i = 0; i < clientes; i++) {
+
+
+
         if (i == cliente) {
             continue;
         }
@@ -101,7 +104,7 @@ void dizRank(Ranking *rank, float **matrizSimilaridade, int cliente, int *listaV
 }
     
     
-bool comparaRank(Ranking a, Ranking b) {
+bool comparaRank(const Ranking &a, const Ranking &b) {
         
     if (a.rank != b.rank) {
         return a.rank < b.rank;      
