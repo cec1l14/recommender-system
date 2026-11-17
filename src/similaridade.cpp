@@ -2,7 +2,7 @@
  * Implementação do módulo: similaridade
  * Autores: Cecília Candeia e Matheus Fernandes
  * Data de Criação: 13/11/2026
- * Última alteração: xx/11/2026
+ * Última alteração: 15/11/2026
  * Descrição Geral: contém funções para cálculo de similaridade entre clientes, criação de matrizes de compras, transposta, interseção e similaridade, além de funções auxiliares para gerenciamento de memória.
  ****/
 

@@ -2,7 +2,7 @@
  * Implementação do módulo: recomendação
  * Autores: Cecília Candeia e Matheus Fernandes
  * Data de Criação: 14/11/2026
- * Última alteração: xx/11/2026
+ * Última alteração: 15/11/2026
  * Descrição Geral: contém funções para recomendação de produtos a partir da similaridade entre clientes, criação de listas de vizinhos, ranqueamento e recomendação de produtos. 
  ****/
 
@@ -173,7 +173,6 @@ vector<int> recomendaProdutos(float **matrizSimilaridade, int cliente, int k, Li
     return recomendados;
 }
 
-// codigos: vetor com os códigos originais de 3 clientes
 void testarRecomendacao(ListaCompras *lista, int k, char *codigos[]){
     int clientes = lista->vectorClientes.size();
     int produtos = lista->vectorProdutos.size();

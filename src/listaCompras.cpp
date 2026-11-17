@@ -2,7 +2,7 @@
  * Implementação do módulo: listaCompras
  * Autores: Cecília Candeia e Matheus Fernandes
  * Data de Criação: 12/11/2026
- * Última alteração: xx/11/2026
+ * Última alteração: 15/11/2026
  * Descrição Geral: apresenta funções para leitura de arquivos CSV e teste da estrutura de dados ListaCompras.
  ****/
 
