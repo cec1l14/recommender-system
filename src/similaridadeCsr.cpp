@@ -11,24 +11,24 @@ struct CSR {
 CSR criaComprasCSR(ListaCompras *lista) {
     CSR matrizCompras;
     int linhas = lista->vectorClientes.size();
-    int rowCount = 0;
 
     for (int i = 0; i < linhas; i++) {
         for (int produto : lista->listaCompras[i]) {
-            matrizCompras.values.push_back(1.0);
+            matrizCompras.values.push_back(1);
             matrizCompras.col_index.push_back(produto);
-            rowCount++;
         }
-        matrizCompras.row_ptr.push_back(rowCount);
+        matrizCompras.row_ptr.push_back(matrizCompras.values.size());
     }
     return matrizCompras;
 }
 
-CSR criaInterseccaoCSR(const CSR& s) {
+CSR criaInterseccaoCSR(const CSR& matrizCompras) {
     CSR matrizInterseccao;                    
-    int row = matrizCompras.row_ptr.size() - 1;
+    int n = matrizCompras.row_ptr.size() - 1;
     int cont = 0;
-
+    
+    // o pdf dizia pra alocar n ao quadrado mas ao fazer isso nao tava rodando! (alocacao falhou vei)
+    
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < row; j++) {
             int inicioI = matrizCompras.row_ptr[i];
@@ -51,7 +51,7 @@ CSR criaInterseccaoCSR(const CSR& s) {
                 }
             }
 
-            if (soma > 0) {
+            if (soma != 0) {
                 matrizInterseccao.values.push_back(soma);
                 matrizInterseccao.col_index.push_back(j);
                 cont++;
