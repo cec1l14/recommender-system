@@ -29,8 +29,8 @@ CSR criaInterseccaoCSR(const CSR& matrizCompras) {
     
     // o pdf dizia pra alocar n ao quadrado mas ao fazer isso nao tava rodando! (alocacao falhou vei)
     
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < row; j++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             int inicioI = matrizCompras.row_ptr[i];
             int fimI    = matrizCompras.row_ptr[i + 1];
             int inicioJ = matrizCompras.row_ptr[j];
