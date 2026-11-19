@@ -67,3 +67,30 @@ readData -> recebe o caminho dos dados
 proibido uso de variáveis estáticas e globais
 
 entrega 4: adição de uma nova função à etapa 3
+
+## Entrega 6 (19/11/2026)
+
+- uso de pandas para a leitura do csv
+- pacote bind para fazer ligação (pybind11)
+- -inplace -> criação de arquivo na pasta atual
+- uso de função "m.def"
+
+m.def(
+   "soma_valores",
+    &somaValores,
+   "opa"
+);
+
+bind so com funcoes cientificas
+
+conversões python - c++
+
+lista - vector
+dicionário - map
+tupla - tupla
+
+compila-se o setup
+
+make_tuple
+
+main com o if name, usando argv, e pegando a funcao de leitura de arquivo do arquivo de leitura.
