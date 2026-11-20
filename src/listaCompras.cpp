@@ -26,8 +26,6 @@ int leituraCSV(char *arquivo, ListaCompras *lista){
     fscanf(f, "%*[^\n]");
     r = fscanf(f, " %8[^,],%19[^,],%d,%199[^\r\n]", data, cliente, &produto, nome);
 
-    // leitura única: associa os índices e já preenche a lista de compras
-
     while(r>=0){
         if(r==4){
             if(lista->mapClientes.find(cliente) == lista->mapClientes.end()){
@@ -61,4 +59,21 @@ int leituraCSV(char *arquivo, ListaCompras *lista){
     }
     fclose(f);
     return 0;
+}
+
+void testarListaCompras(ListaCompras *lista, char *codigos[]){
+    int i;
+
+    for (i = 0; i < 3; i++) {
+        printf("Cliente %s:\n", codigos[i]);
+
+        if (lista->mapClientes.find(codigos[i]) == lista->mapClientes.end()) {
+            printf("Cliente nao encontrado.\n");
+        } else {
+            int indice = lista->mapClientes[codigos[i]];
+            for (int p : lista->listCompras[indice]) {
+                cout << lista->vectorProdutos[p] << endl;
+            }
+        }
+    }
 }

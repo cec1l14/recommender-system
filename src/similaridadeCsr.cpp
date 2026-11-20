@@ -1,19 +1,14 @@
 #include <stdio.h>
 #include <vector>
+#include "similaridadeCsr.h"
 using namespace std;
-
-struct CSR {
-    vector<int> values;
-    vector<int>  col_index;
-    vector<int>  row_ptr = {0};
-};
 
 CSR criaComprasCSR(ListaCompras *lista) {
     CSR matrizCompras;
     int linhas = lista->vectorClientes.size();
 
     for (int i = 0; i < linhas; i++) {
-        for (int produto : lista->listaCompras[i]) {
+        for (int produto : lista->listCompras[i]) {
             matrizCompras.values.push_back(1);
             matrizCompras.col_index.push_back(produto);
         }
