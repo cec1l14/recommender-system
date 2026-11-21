@@ -1,15 +1,38 @@
-#include <stdio.h>
 #include <vector>
+#include <cstdlib>
 #include "similaridadeCsr.h"
 
-CSR criaComprasCSR(ListaCompras *lista) {
-    CSR matrizCompras;
+
+int **criaMatrizCompras(ListaCompras *lista) {
     int linhas = lista->vectorClientes.size();
+    int colunas = lista->vectorProdutos.size();
+
+    int **matrizComprasDensa = (int **) malloc(linhas * sizeof(int *));
 
     for (int i = 0; i < linhas; i++) {
-        for (int produto : lista->listCompras[i]) {
-            matrizCompras.values.push_back(1);
-            matrizCompras.col_index.push_back(produto);
+        matrizComprasDensa[i] = (int *) malloc(colunas * sizeof(int));
+
+        for (int j = 0; j < colunas; j++) {
+            matrizComprasDensa[i][j] = 0;
+        }
+        for (int k : lista->listCompras[i]) {
+            matrizComprasDensa[i][k] = 1;
+        }
+    }
+    return matrizComprasDensa;
+}
+
+CSR criaComprasCSR(ListaCompras *lista, int **matrizComprasDensa) {
+    CSR matrizCompras;
+    int linhas = lista->vectorClientes.size();
+    int colunas = lista->vectorProdutos.size();
+
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            if (matrizComprasDensa[i][j] != 0) {
+                matrizCompras.values.push_back(matrizComprasDensa[i][j]);
+                matrizCompras.col_index.push_back(j);
+            }
         }
         matrizCompras.row_ptr.push_back(matrizCompras.values.size());
     }
