@@ -78,7 +78,7 @@ CSR criaInterseccaoCSR(const CSR& matrizCompras) {
     return matrizInterseccao;
 }
 
-CSR calculaSimilaridade(const CSR& matrizCompras, const CSR& matrizInterseccao) {
+CSR criaSimilaridadeCSR(const CSR& matrizCompras, const CSR& matrizInterseccao) {
     CSR matrizSimilaridade;
     int n = matrizInterseccao.row_ptr.size() - 1;
 
@@ -154,4 +154,24 @@ void liberdadeMatrizCompras(int **matrizComprasDensa, ListaCompras *lista) {  //
         free(matrizComprasDensa[i]);
     }
     free(matrizComprasDensa);
+}
+
+// mesmo padrão antigo, mas com as novas funções!
+void testarSimilaridadeCSR(ListaCompras *lista, int indice){
+
+    int **matrizComprasDensa = criaMatrizCompras(lista);
+    CSR matrizCompras = criaComprasCSR(lista, matrizComprasDensa);
+    liberdadeMatrizCompras(matrizComprasDensa, lista);
+    CSR matrizInterseccao = criaInterseccaoCSR(matrizCompras);
+    CSR matrizSimilaridade = criaSimilaridadeCSR(matrizCompras, matrizInterseccao);
+
+    int match = matchClientes(matrizSimilaridade, indice, lista);
+
+    if(match == -1){
+        printf("Nao ha similaridade.\n");
+    } else {
+        printf("Cliente mais similar: %d, com similaridade = %.3f\n", match,
+        dizSimilaridade(matrizSimilaridade, indice, match));
+    }
+
 }
