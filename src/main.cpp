@@ -14,11 +14,12 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    if (argc < 4) {
+    if (argc < 3) {
         printf("Uso:\n");
         printf("  %s 1 <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
         printf("  %s 2 <indiceCliente> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
         printf("  %s 3 <k> <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
+        printf("  %s 4 <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
         return 1;
     }
 
@@ -31,6 +32,8 @@ int main(int argc, char *argv[]) {
         primeiroArquivo = 3;
     } else if (opcao == 3) {
         primeiroArquivo = 6;
+    } else if (opcao == 4) {
+        primeiroArquivo = 2;
     } else {
         printf("Opcao invalida\n");
         return 1;
@@ -52,8 +55,10 @@ int main(int argc, char *argv[]) {
         testarListaCompras(&lista, &argv[2]);
     } else if (opcao == 2) {
         testarSimilaridade(&lista, atoi(argv[2]));
-    } else {
+    } else if (opcao == 3) {
         testarRecomendacao(&lista, atoi(argv[2]), &argv[3]);
+    } else if (opcao == 4){
+        testarEficiencia(&lista);
     }
 
     return 0;
