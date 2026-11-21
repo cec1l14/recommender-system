@@ -1,6 +1,9 @@
 #ifndef SIMILARIDADE_H
 #define SIMILARIDADE_H
 
+#define ALGORITMO_PADRAO 0
+#define ALGORITMO_ADAPTADO 1
+
 #include "listaCompras.h"   
 
 int **criaMatrizCompras(ListaCompras *lista);
@@ -14,6 +17,10 @@ float dizSimilaridade(float **matrizSimilaridade, int clienteA, int clienteB, Li
 void liberdadeMatriz(int **matriz, int linhas);
 void liberdadeMatrizFloat(float **matriz, int linhas);
 
+int **criaInterseccaoEficiente(int **matrizCompras, ListaCompras *lista);
+float **dizSimilaridadeEficiente(ListaCompras *lista, int algoritmo);
+
+void testarEficiencia(ListaCompras *lista);
 void testarSimilaridade(ListaCompras *lista, int indice);
 
 #endif

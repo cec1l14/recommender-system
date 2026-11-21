@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <vector>
 #include "similaridadeCsr.h"
-using namespace std;
 
 CSR criaComprasCSR(ListaCompras *lista) {
     CSR matrizCompras;

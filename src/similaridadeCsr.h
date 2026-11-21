@@ -2,6 +2,8 @@
 #define SIMILARIDADECSR_H
 #include "listaCompras.h" 
 
+using namespace std;
+
 struct CSR {
     vector<int> values;
     vector<int>  col_index;

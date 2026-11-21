@@ -139,6 +139,62 @@ void liberdadeMatrizFloat(float **matriz, int linhas){
     free(matriz);
 }
 
+int **criaInterseccaoEficiente(int **matrizCompras, ListaCompras *lista){
+    int linhas = lista->vectorClientes.size();
+    int colunas = lista->vectorProdutos.size();
+
+    int **matrizInterseccao = (int **) malloc(linhas * sizeof(int *));
+
+    int i, j, k;
+
+    for(i = 0; i < linhas; i++){                        
+        matrizInterseccao[i] = (int *) malloc(linhas * sizeof(int));
+    }
+
+    for(i = 0; i < linhas; i++){                         
+        for(j = i; j < linhas; j++){
+            int soma = 0;
+            for(k = 0; k < colunas; k++){
+                soma += (matrizCompras[i][k] * matrizCompras[j][k]);
+            }
+            matrizInterseccao[i][j] = soma;
+            matrizInterseccao[j][i] = soma;
+        }
+    }
+    return matrizInterseccao;
+}
+
+float **dizSimilaridadeEficiente(ListaCompras *lista, int algoritmo){
+    int clientes = lista->vectorClientes.size();
+    int produtos = lista->vectorProdutos.size();
+
+    int **matrizCompras = criaMatrizCompras(lista);
+    int **matrizInterseccao;
+
+    if (algoritmo == ALGORITMO_PADRAO) {
+        int **matrizTransposta = criaMatrizTransposta(matrizCompras, lista);
+        matrizInterseccao = criaInterseccao(matrizCompras, matrizTransposta, lista);
+        liberdadeMatriz(matrizTransposta, produtos);
+
+    } else if (algoritmo == ALGORITMO_ADAPTADO) {
+        matrizInterseccao = criaInterseccaoEficiente(matrizCompras, lista);
+
+    } else {
+        cout << "Algoritmo invalido." << "\n";
+        liberdadeMatriz(matrizCompras, clientes);
+        return NULL;
+    }
+    float **matrizSimilaridade = criaMatrizSimilaridade(matrizInterseccao, lista);
+    liberdadeMatriz(matrizCompras, clientes);  
+    liberdadeMatriz(matrizInterseccao, clientes);
+
+    return matrizSimilaridade;
+}
+
+void testarEficiencia(ListaCompras *lista){
+    
+}
+
 void testarSimilaridade(ListaCompras *lista, int indice){
     int clientes = lista->vectorClientes.size();
     int produtos = lista->vectorProdutos.size();
