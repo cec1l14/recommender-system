@@ -2,6 +2,26 @@
 #include <cstdlib>
 #include "similaridadeCsr.h"
 
+using namespace std;
+
+int **criaMatrizCompras(ListaCompras *lista) {
+    int linhas = lista->vectorClientes.size();
+    int colunas = lista->vectorProdutos.size();
+
+    int **matrizComprasDensa = (int **) malloc(linhas * sizeof(int *));
+
+    for (int i = 0; i < linhas; i++) {
+        matrizComprasDensa[i] = (int *) malloc(colunas * sizeof(int));
+
+        for (int j = 0; j < colunas; j++) {
+            matrizComprasDensa[i][j] = 0;
+        }
+        for (int k : lista->listCompras[i]) {
+            matrizComprasDensa[i][k] = 1;
+        }
+    }
+    return matrizComprasDensa;
+}
 
 CSR criaComprasCSR(ListaCompras *lista, int **matrizComprasDensa) {
     CSR matrizCompras;
@@ -58,4 +78,50 @@ CSR criaInterseccaoCSR(const CSR& matrizCompras) {
         matrizInterseccao.row_ptr.push_back(cont);   
     }
     return matrizInterseccao;
+}
+
+CSR calculaSimilaridade(const CSR& matrizCompras, const CSR& matrizInterseccao) {
+    CSR matrizSimilaridade;
+    int n = matrizInterseccao.row_ptr.size() - 1;
+
+    for (int i = 0; i < n; i++) {
+        
+        int produtos = matrizCompras.row_ptr[i + 1] - matrizCompras.row_ptr[i];
+        
+        for (int k = matrizInterseccao.row_ptr[i]; k < matrizInterseccao.row_ptr[i + 1]; k++) {
+            
+            int j = matrizInterseccao.col_index[k];
+            int interseccao = matrizInterseccao.values[k];
+
+            float similaridade = 1 - (float) interseccao / produtos;
+
+            matrizSimilaridade.values.push_back(similaridade);
+            matrizSimilaridade.col_index.push_back(j);
+        }
+        matrizSimilaridade.row_ptr.push_back(matrizSimilaridade.values.size());
+    }
+    return matrizSimilaridade;
+}
+
+// pacode aula busca binaria <3
+float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB) {
+    
+    int lo = matrizSimilaridade.row_ptr[clienteA];
+    int hi = matrizSimilaridade.row_ptr[clienteA + 1] - 1;
+
+    while (lo <= hi) {
+        
+        int mid = (lo + hi) / 2
+        
+        if (matrizSimilaridade.col_index[mid] == clienteB){
+            return matrizSimilaridade.values[mid];
+        }
+        
+        else if (matrizSimilaridade.col_index[mid] < clienteB){
+            lo = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return 1;  // nao achou ent nao tem 
 }
