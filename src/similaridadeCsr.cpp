@@ -44,9 +44,7 @@ CSR criaInterseccaoCSR(const CSR& matrizCompras) {
     CSR matrizInterseccao;                    
     int n = matrizCompras.row_ptr.size() - 1;
     int cont = 0;
-    
-    // o pdf dizia pra alocar n ao quadrado mas ao fazer isso nao tava rodando! (alocacao falhou vei)
-    
+        
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             int inicioI = matrizCompras.row_ptr[i];
@@ -103,6 +101,30 @@ CSR calculaSimilaridade(const CSR& matrizCompras, const CSR& matrizInterseccao) 
     return matrizSimilaridade;
 }
 
+int matchClientes(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista) {
+    int clientes = lista->vectorClientes.size();
+
+    if (cliente < 0 || cliente >= clientes) {
+        cout << "Indice de cliente invalido." << "\n";
+        return -1;
+    }
+
+    int matchIndice = -1;
+    float matchValor = 1;
+
+    for (int k = matrizSimilaridade.row_ptr[cliente]; k < matrizSimilaridade.row_ptr[cliente + 1]; k++) {
+        int j =  matrizSimilaridade.col_index[k];
+        if (j == cliente) {
+            continue;
+        }
+        if (matrizSimilaridade.values[k] < matchValor) {
+            matchValor =  matrizSimilaridade.values[k];
+            matchIndice = j;
+        }
+    }
+    return matchIndice;
+}
+
 // pacode aula busca binaria <3
 float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB) {
     
@@ -111,7 +133,7 @@ float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB)
 
     while (lo <= hi) {
         
-        int mid = (lo + hi) / 2
+        int mid = (lo + hi) / 2;
         
         if (matrizSimilaridade.col_index[mid] == clienteB){
             return matrizSimilaridade.values[mid];
@@ -120,7 +142,7 @@ float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB)
         else if (matrizSimilaridade.col_index[mid] < clienteB){
             lo = mid + 1;
         } else {
-            high = mid - 1;
+            hi = mid - 1;
         }
     }
     return 1;  // nao achou ent nao tem 
