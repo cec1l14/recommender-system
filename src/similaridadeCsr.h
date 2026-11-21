@@ -18,5 +18,6 @@ CSR calculaSimilaridade(const CSR& matrizCompras, const CSR& matrizInterseccao);
 int matchClientes(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista);
 float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB);
 void liberdadeMatrizCompras(int **matrizComprasDensa, ListaCompras *lista);
+void testarSimilaridadeCSR(ListaCompras *lista, int indice);
 
 #endif
