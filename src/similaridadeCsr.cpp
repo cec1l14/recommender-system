@@ -1,5 +1,6 @@
 #include <vector>
 #include <cstdlib>
+#include <iostream>
 #include "similaridadeCsr.h"
 
 using namespace std;

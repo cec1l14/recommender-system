@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+#include <ctime>
 #include "listaCompras.h"  
 #include "similaridade.h" 
 
@@ -192,7 +193,24 @@ float **dizSimilaridadeEficiente(ListaCompras *lista, int algoritmo){
 }
 
 void testarEficiencia(ListaCompras *lista){
-    
+    int clientes = lista->vectorClientes.size();
+
+    // código para o algoritmo padrão
+
+    clock_t inicio = clock();
+    float **padrao = dizSimilaridadeEficiente(lista, ALGORITMO_PADRAO);clock_t fim = clock();
+    double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Algoritmo padrao:  %.3f segundos\n", tempo);
+    liberdadeMatrizFloat(padrao, clientes);
+
+    // código para o algoritmo adaptado
+
+    inicio = clock();
+    float **adaptado = dizSimilaridadeEficiente(lista, ALGORITMO_ADAPTADO);
+    fim = clock();
+    double tempoA = double(fim - inicio)/ CLOCKS_PER_SEC;
+    printf("Algoritmo adaptado: %.3f segundos\n", tempoA);
+    liberdadeMatrizFloat(adaptado, clientes);
 }
 
 void testarSimilaridade(ListaCompras *lista, int indice){
