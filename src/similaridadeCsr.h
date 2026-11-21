@@ -3,7 +3,7 @@
 #include "listaCompras.h" 
 
 struct CSR {
-    vector<int> values;
+    vector<float> values;
     vector<int>  col_index;
     vector<int>  row_ptr = {0};
 };
