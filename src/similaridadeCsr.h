@@ -14,9 +14,9 @@ struct CSR {
 int **criaMatrizCompras(ListaCompras *lista);
 CSR criaComprasCSR(ListaCompras *lista, int **matrizComprasDensa);
 CSR criaInterseccaoCSR(const CSR& matrizCompras);
-CSR calculaSimilaridade(const CSR& matrizCompras, const CSR& matrizInterseccao);
-int matchClientes(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista);
-float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB);
+CSR criaSimilaridadeCSR(const CSR& matrizCompras, const CSR& matrizInterseccao);
+int matchClientesCSR(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista);
+float dizSimilaridadeCSR(const CSR& matrizSimilaridade, int clienteA, int clienteB);
 void liberdadeMatrizCompras(int **matrizComprasDensa, ListaCompras *lista);
 void testarSimilaridadeCSR(ListaCompras *lista, int indice);
 
