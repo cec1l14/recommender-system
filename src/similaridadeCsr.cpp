@@ -101,7 +101,7 @@ CSR criaSimilaridadeCSR(const CSR& matrizCompras, const CSR& matrizInterseccao) 
     return matrizSimilaridade;
 }
 
-int matchClientes(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista) {
+int matchClientesCSR(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista) {
     int clientes = lista->vectorClientes.size();
 
     if (cliente < 0 || cliente >= clientes) {
@@ -126,7 +126,7 @@ int matchClientes(const CSR& matrizSimilaridade, int cliente, ListaCompras *list
 }
 
 // pacode aula busca binaria <3
-float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB) {
+float dizSimilaridadeCSR(const CSR& matrizSimilaridade, int clienteA, int clienteB) {
     
     int lo = matrizSimilaridade.row_ptr[clienteA];
     int hi = matrizSimilaridade.row_ptr[clienteA + 1] - 1;
@@ -165,13 +165,13 @@ void testarSimilaridadeCSR(ListaCompras *lista, int indice){
     CSR matrizInterseccao = criaInterseccaoCSR(matrizCompras);
     CSR matrizSimilaridade = criaSimilaridadeCSR(matrizCompras, matrizInterseccao);
 
-    int match = matchClientes(matrizSimilaridade, indice, lista);
+    int match = matchClientesCSR(matrizSimilaridade, indice, lista);
 
     if(match == -1){
         printf("Nao ha similaridade.\n");
     } else {
         printf("Cliente mais similar: %d, com similaridade = %.3f\n", match,
-        dizSimilaridade(matrizSimilaridade, indice, match));
+        dizSimilaridadeCSR(matrizSimilaridade, indice, match));
     }
 
 }
