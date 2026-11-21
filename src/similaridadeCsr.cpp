@@ -125,3 +125,11 @@ float dizSimilaridade(const CSR& matrizSimilaridade, int clienteA, int clienteB)
     }
     return 1;  // nao achou ent nao tem 
 }
+
+void liberdadeMatrizCompras(int **matrizComprasDensa, ListaCompras *lista) {  // como so uso malloc nela ai ja deixo o nome bonitinho
+    int linhas = lista->vectorClientes.size();
+    for (int i = 0; i < linhas; i++) {
+        free(matrizComprasDensa[i]);
+    }
+    free(matrizComprasDensa);
+}
