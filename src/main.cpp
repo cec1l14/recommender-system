@@ -64,7 +64,12 @@ int main(int argc, char *argv[]) {
     } else if (opcao == 4){
         testarEficiencia(&lista);
     } else if (opcao == 5){
+        printf("Tempo de execucao - comparacao\n");
         testarEficienciaCSR(&lista);
+        printf("\n");
+
+        printf("Economia de memoria - comparacao\n");
+        testarMemoriaCSR(&lista);
     }
 
     return 0;

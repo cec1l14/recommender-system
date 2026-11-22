@@ -212,3 +212,18 @@ void testarEficienciaCSR(ListaCompras *lista){
     printf("Matriz CSR:   %.3f segundos\n", tempoCSR);
 }
 
+void testarMemoriaCSR(ListaCompras *lista) {
+    int clientes = lista->vectorClientes.size();
+    int produtos = lista->vectorProdutos.size();
+
+    int **comprasDensa = criaMatrizDensa(lista);
+    CSR compras = criaComprasCSR(lista, comprasDensa);
+    liberdadeMatrizCompras(comprasDensa, lista);
+
+    double densa = (double) clientes * produtos * 4 / (1024 * 1024);
+    double esparsa = (compras.values.size() + compras.col_index.size() + compras.row_ptr.size()) * 4.0 / (1024 * 1024);
+
+    printf("Matriz de compras densa: %.3f MB\n", densa);
+    printf("Matriz de compras CSR:   %.3f MB\n", esparsa);
+    printf("Reducao: %.1f vezes\n", densa / esparsa);
+}

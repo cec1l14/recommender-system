@@ -19,6 +19,8 @@ int matchClientesCSR(const CSR& matrizSimilaridade, int cliente, ListaCompras *l
 float dizSimilaridadeCSR(const CSR& matrizSimilaridade, int clienteA, int clienteB);
 void liberdadeMatrizCompras(int **matrizComprasDensa, ListaCompras *lista);
 void testarSimilaridadeCSR(ListaCompras *lista, int indice);
+
 void testarEficienciaCSR(ListaCompras *lista);
+void testarMemoriaCSR(ListaCompras *lista);
 
 #endif
