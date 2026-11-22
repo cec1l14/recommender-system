@@ -1,7 +1,7 @@
 # Sistema de Recomendação
 
 Projeto de Programação Estruturada (Ciência de Dados e Inteligência Artificial, UFPB), em C, com recuros de C++ e Python (etapa final).
-Em suma, o sistema recomenda produtos a um cliente a partir do que clientes parecidos com ele compraram, baseado em uma filtragem colaborativa baseada em usuário.
+Em suma, o sistema recomenda produtos a um cliente a partir do que clientes parecidos com ele compraram, a partir de uma filtragem colaborativa baseada em usuário.
 
 ## Estrutura do projeto
 
@@ -149,4 +149,4 @@ CASAVELLA, Eduardo. Argumentos em linha de comando. **Linguagem C**, [S. l.], 30
 
 **IMPLEMENTAÇÃO de um sistema de recomendação**. [S. l.: s. n.], [2026?]. Material didático da disciplina de Programação Estruturada, Universidade Federal da Paraíba. 28 p. Documento em PDF.
 
-LABPIB. **Algoritmos e Estruturas de Dados - USP - matrizes esparsas**. [S. l.]: YouTube, [2011?]. Playlist de vídeos. Disponível em: https://www.youtube.com/playlist?list=PLDE07C44D7E8F091A. Acesso em: 22 nov. 2026.
+LABPIB. **Algoritmos e Estruturas de Dados - USP - matrizes esparsas**. [S. l.]: YouTube, [2011?]. Playlist de vídeos. Disponível em: https://www.youtube.com/playlist?list=PLDE07C44D7E8F091A. Acesso em: 20 nov. 2026.
