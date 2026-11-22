@@ -1,7 +1,7 @@
 # Sistema de Recomendação
 
 Projeto de Programação Estruturada (Ciência de Dados e Inteligência Artificial, UFPB), em C, com recuros de C++ e Python (etapa final).
-Em suma, o sistema recomenda produtos a um cliente a partir do que clientes parecidos com ele compraram, a partir de uma filtragem colaborativa baseada em usuário.
+Em suma, o sistema recomenda produtos a um cliente a partir do que clientes parecidos com ele compraram, por meio de uma filtragem colaborativa baseada em usuário.
 
 ## Estrutura do projeto
 
