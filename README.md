@@ -1,14 +1,7 @@
 # Sistema de Recomendação
 
-Projeto, implementado na linguagem de programação C (com recursos de C++), para a disciplina Programação Estruturada, no curso Ciência de Dados e Inteligência Artificial (Universidade Federal da Paraíba).
-
-O sistema recomenda produtos a clientes a partir do histórico de compras, usando filtragem colaborativa baseada em vizinhança (user-based): recomendam-se a um cliente os produtos comprados por clientes parecidos com ele.
-
-Em suma, o projeto, até agora, está dividido em três implementações básicas:
-
-- Módulo Lista de Compras: leitura dos arquivos CSV de vendas e organização das compras de cada cliente;
-- Módulo Similaridade: cálculo da distância entre os clientes, a partir das compras em comum;
-- Módulo Recomendação: ranqueamento e sugestão de produtos para um cliente.
+Projeto de Programação Estruturada (Ciência de Dados e Inteligência Artificial, UFPB), em C, com recuros de C++ e Python (etapa final).
+Em suma, o sistema recomenda produtos a um cliente a partir do que clientes parecidos com ele compraram, baseado em uma filtragem colaborativa baseada em usuário.
 
 ## Estrutura do projeto
 
@@ -20,91 +13,107 @@ recommender-system/
 │   ├── main.cpp
 │   ├── listaCompras.cpp / listaCompras.h
 │   ├── similaridade.cpp / similaridade.h
+│   ├── similaridadeCsr.cpp / similaridadeCsr.h
 │   └── recomendacao.cpp / recomendacao.h
-└── data/
-    └── dados_venda_cluster_*.csv
+├── data/
+│   └── dados_venda_cluster_*.csv
+├── docs/
+│   └── aula.md
+└── python/
 ```
 
-## Módulo Lista de Compras
-
-Lê os arquivos CSV de vendas, em que cada linha é uma compra no formato `DATA_COMPRA,COD_CLIENTE,COD_PRODUTO,NOME_PRODUTO`, e guarda, para cada cliente, os produtos que ele comprou.
-
-A leitura é feita em duas fases: na primeira, cada cliente e cada produto recebem um índice interno; na segunda, os índices dos produtos são adicionados à lista de compras de cada cliente. Linhas mal formatadas são ignoradas, e compras repetidas do mesmo produto por um cliente são guardadas uma única vez.
-
-Estrutura de dados: a struct `ListaCompras` reúne `vectorClientes` e `mapClientes` (código original ↔ índice do cliente), `vectorProdutos` e `mapProdutos` (nome e código original ↔ índice do produto) e `listCompras` (para cada cliente, a lista dos índices dos produtos comprados).
-
-## Módulo Similaridade
-
-Calcula o quanto os clientes se parecem. Primeiro, monta a matriz binária de compras `A` (clientes × produtos), em que 1 indica que o cliente comprou o produto. Depois, calcula a interseção entre os clientes pelo produto `A × Aᵀ` e a similaridade pela distância de Jaccard assimétrica:
-
-| Valor de S[i][j] | Significado |
-|---|---|
-| 0 | o cliente j comprou tudo o que o cliente i comprou |
-| entre 0 e 1 | j comprou parte dos produtos de i (quanto menor, mais parecidos) |
-| 1 | nenhum produto em comum |
-
-A fórmula é `S[i][j] = 1 - |Pi ∩ Pj| / |Pi|`, em que `Pi` é o conjunto de produtos comprados pelo cliente `i`.
-
-## Módulo Recomendação
-
-Para um cliente, o sistema segue os passos abaixo:
-
-| Passo | O que acontece |
-|---|---|
-| 1 | Os vizinhos do cliente são os clientes com similaridade menor que 1. |
-| 2 | Todos os produtos começam com valor 1 em um vetor de ranqueamento. |
-| 3 | Para cada produto de um vizinho que o cliente ainda não comprou, o valor do produto é multiplicado pela similaridade do vizinho. |
-| 4 | Os produtos com valor menor que 1 são ordenados do menor para o maior valor. |
-| 5 | Os `k` primeiros são recomendados. |
-
-Quanto mais vizinhos parecidos compraram um produto, menor (melhor) fica o valor dele.
-
-## Como clonar
+## Compilar
 
 ```bash
 git clone https://github.com/cec1l14/recommender-system.git
+cd recommender-system
+g++ -std=c++11 -o a.exe src/main.cpp src/listaCompras.cpp src/similaridade.cpp src/recomendacao.cpp
 ```
 
-## Como compilar
-
-É necessário um compilador C++ com suporte a C++11, como o `g++`.
+## Executar
 
 ```bash
-cd recommender-system/src
-g++ -std=c++11 -Wall -o a.exe *.cpp
+.\a.exe 1 <cod1> <cod2> <cod3> <arquivo.csv>        
+.\a.exe 2 <indice> <arquivo.csv>                   
+.\a.exe 3 <k> <cod1> <cod2> <cod3> <arquivo.csv>    
+.\a.exe 4 <arquivo.csv>                             
 ```
 
-## Como executar
+## Exemplos
 
-O primeiro argumento escolhe o módulo a testar, e os arquivos CSV vêm sempre no final (pode-se passar mais de um).
+### Lista de Compras
 
-Módulo Lista de Compras (mostra os produtos comprados por 3 clientes, pelos códigos originais):
+Produtos comprados por 3 clientes, pelos códigos originais:
 
 ```bash
-.\a.exe 1 <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]
+.\a.exe 1 99CL9Y01 9O6OSM01 99KKM901 data\dados_venda_cluster_1.csv
 ```
 
-Módulo Similaridade (mostra o cliente mais similar, pelo índice interno):
+```
+Cliente 99CL9Y01:
+TABLET NB316 M7S 16GB QUAD CORE PRETO
+PEN DRIVE 16GB PD688 TWIST ROSA MULTILASER
+CAIXA AMPLIFICADA MCO-07 MULTI CONNECT
+Cliente 9O6OSM01:
+TABLET NB730 MINI MS50G PRATA/PRETO
+PEN DRIVE 16GB PD688 TWIST ROSA MULTILASER
+Cliente 99KKM901:
+SMARTPHONE SAMSUNG GAL J2 CORE 16GB PRETO
+RADIO RECEPTOR 2 FXS RM PFT22AC
+PEN DRIVE 16GB PD688 TWIST ROSA MULTILASER
+DVD D-15 KARAOKE MONDIAL
+RADIO RECEPTOR 7 FXS RM PFT73AC
+```
+
+### Similaridade
+
+Cliente mais parecido com o cliente de índice 0 (0 = comprou tudo o que ele comprou, 1 = nada em comum):
 
 ```bash
-.\a.exe 2 <indiceCliente> <arquivo1.csv> [arquivo2.csv ...]
+.\a.exe 2 0 data\dados_venda_cluster_1.csv
 ```
 
-Módulo Recomendação (mostra os `k` produtos recomendados para 3 clientes, pelos códigos originais):
+```
+Cliente mais similar: 1, com similaridade = 0.667
+```
+
+### Recomendação
+
+Os 3 produtos mais bem recomendados para cada um de 3 clientes:
 
 ```bash
-.\a.exe 3 <k> <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]
+.\a.exe 3 3 99EIP501 99PXGH01 99BVWE01 data\dados_venda_cluster_1.csv
 ```
 
-Exemplos:
+```
+Cliente 99EIP501:
+PEN DRIVE 16GB PD588 TWIST PRETO
+PEN DRIVE 8GB PD587 TWIST PRETO
+SUPORTE UNIV. BEDIN BU-25
+Cliente 99PXGH01:
+PEN DRIVE 16GB PD588 TWIST PRETO
+SUPORTE TV UNIVERSAL LCD/LED 10 A 71 SBRUB750
+PEN DRIVE 8GB PD687 TWIST ROSA
+Cliente 99BVWE01:
+SUPORTE TV UNIVERSAL LCD/LED 10 A 71 SBRUB750
+PEN DRIVE 16GB PD588 TWIST PRETO
+PEN DRIVE 8GB PD587 TWIST PRETO
+```
+
+Se algum código não existir no arquivo, é exibida a mensagem `Cliente nao encontrado.`
+
+### Tempo dos algoritmos de similaridade
+
+Compara o algoritmo padrão com o adaptado (os tempos variam de computador para computador):
 
 ```bash
-.\a.exe 1 99EIP501 99PXGH01 99BVWE01 ..\data\dados_venda_cluster_1.csv
-.\a.exe 2 0 ..\data\dados_venda_cluster_1.csv
-.\a.exe 3 5 99EIP501 99PXGH01 99BVWE01 ..\data\dados_venda_cluster_1.csv
+.\a.exe 4 data\dados_venda_cluster_1.csv
 ```
 
-Aparecerão os nomes dos produtos comprados (opção 1) ou dos 5 produtos recomendados (opção 3) para cada um dos 3 clientes. Se algum código não existir nos arquivos, é exibida a mensagem `Cliente nao encontrado.`
+```
+Algoritmo padrao:  0.326 segundos
+Algoritmo adaptado: 0.156 segundos
+```
 
 ## Integrantes
 
