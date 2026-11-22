@@ -27,7 +27,7 @@ recommender-system/
 ```bash
 git clone https://github.com/cec1l14/recommender-system.git
 cd recommender-system
-g++ -std=c++11 -o a.exe src/main.cpp src/listaCompras.cpp src/similaridade.cpp src/recomendacao.cpp
+g++ -std=c++11 -o a.exe src/*.cpp
 ```
 
 ## Executar
@@ -36,7 +36,8 @@ g++ -std=c++11 -o a.exe src/main.cpp src/listaCompras.cpp src/similaridade.cpp s
 .\a.exe 1 <cod1> <cod2> <cod3> <arquivo.csv>        
 .\a.exe 2 <indice> <arquivo.csv>                   
 .\a.exe 3 <k> <cod1> <cod2> <cod3> <arquivo.csv>    
-.\a.exe 4 <arquivo.csv>                             
+.\a.exe 4 <arquivo.csv>
+.\a.exe 5 <arquivo.csv>                             
 ```
 
 ## Exemplos
@@ -113,6 +114,20 @@ Compara o algoritmo padrão com o adaptado (os tempos variam de computador para 
 ```
 Algoritmo padrao:  0.326 segundos
 Algoritmo adaptado: 0.156 segundos
+```
+
+### Tempo com matriz esparsa (CSR)
+
+Compara o tempo de construir a matriz de similaridade com o algoritmo padrão, o adaptado e a matriz esparsa no formato CSR, que guarda só os valores diferentes de zero (os tempos variam de computador para computador):
+
+```bash
+.\a.exe 5 data\dados_venda_cluster_1.csv
+```
+
+```
+Algoritmo padrao:    0.305 segundos
+Algoritmo adaptado:  0.141 segundos
+Matriz CSR:   0.080 segundos
 ```
 
 ## Integrantes
