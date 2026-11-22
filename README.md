@@ -105,7 +105,7 @@ Se algum código não existir no arquivo, é exibida a mensagem `Cliente nao enc
 
 ### Tempo dos algoritmos de similaridade
 
-Compara o algoritmo padrão com o adaptado (os tempos variam de computador para computador):
+Compara o algoritmo padrão com o adaptado.
 
 ```bash
 .\a.exe 4 data\dados_venda_cluster_1.csv
@@ -116,18 +116,24 @@ Algoritmo padrao:  0.326 segundos
 Algoritmo adaptado: 0.156 segundos
 ```
 
-### Tempo com matriz esparsa (CSR)
+### Matriz esparsa (CSR): tempo e memória
 
-Compara o tempo de construir a matriz de similaridade com o algoritmo padrão, o adaptado e a matriz esparsa no formato CSR, que guarda só os valores diferentes de zero (os tempos variam de computador para computador):
+Compara a matriz de similaridade construída com o algoritmo padrão, com o adaptado e em formato CSR (que guarda só os valores diferentes de zero), e compara a memória da matriz de compras na forma densa e em CSR.
 
 ```bash
 .\a.exe 5 data\dados_venda_cluster_1.csv
 ```
 
 ```
-Algoritmo padrao:    0.305 segundos
-Algoritmo adaptado:  0.141 segundos
-Matriz CSR:   0.080 segundos
+Tempo de execucao - comparacao
+Algoritmo padrao:    0.397 segundos
+Algoritmo adaptado:  0.137 segundos
+Matriz CSR:   0.077 segundos
+
+Economia de memoria - comparacao
+Matriz de compras densa: 0.521 MB
+Matriz de compras CSR:   0.014 MB
+Reducao: 37.6 vezes
 ```
 
 ## Integrantes
@@ -136,3 +142,11 @@ Matriz CSR:   0.080 segundos
 |---|---|---|
 | <img src="https://github.com/cec1l14.png" width="40"> | Cecília Candeia | [@cec1l14](https://github.com/cec1l14) |
 | <img src="https://github.com/techteus.png" width="40"> | Matheus Fernandes | [@techteus](https://github.com/techteus) |
+
+## Referências
+
+CASAVELLA, Eduardo. Argumentos em linha de comando. **Linguagem C**, [S. l.], 30 maio 2012. Disponível em: https://linguagemc.com.br/argumentos-em-linha-de-comando/. Acesso em: 20 nov. 2026.
+
+**IMPLEMENTAÇÃO de um sistema de recomendação**. [S. l.: s. n.], [2026?]. Material didático da disciplina de Programação Estruturada, Universidade Federal da Paraíba. 28 p. Documento em PDF.
+
+LABPIB. **Algoritmos e Estruturas de Dados - USP - matrizes esparsas**. [S. l.]: YouTube, [2011?]. Playlist de vídeos. Disponível em: https://www.youtube.com/playlist?list=PLDE07C44D7E8F091A. Acesso em: 22 nov. 2026.
