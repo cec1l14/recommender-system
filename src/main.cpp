@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include "listaCompras.h"
 #include "similaridade.h"
+#include "similaridadeCsr.h"
 #include "recomendacao.h"
 using namespace std;
 
@@ -20,6 +21,7 @@ int main(int argc, char *argv[]) {
         printf("  %s 2 <indiceCliente> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
         printf("  %s 3 <k> <cod1> <cod2> <cod3> <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
         printf("  %s 4 <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]);
+        printf("  %s 5 <arquivo1.csv> [arquivo2.csv ...]\n", argv[0]); 
         return 1;
     }
 
@@ -33,6 +35,8 @@ int main(int argc, char *argv[]) {
     } else if (opcao == 3) {
         primeiroArquivo = 6;
     } else if (opcao == 4) {
+        primeiroArquivo = 2;
+    } else if (opcao == 5) {
         primeiroArquivo = 2;
     } else {
         printf("Opcao invalida\n");
@@ -59,6 +63,8 @@ int main(int argc, char *argv[]) {
         testarRecomendacao(&lista, atoi(argv[2]), &argv[3]);
     } else if (opcao == 4){
         testarEficiencia(&lista);
+    } else if (opcao == 5){
+        testarEficienciaCSR(&lista);
     }
 
     return 0;

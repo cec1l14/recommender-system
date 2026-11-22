@@ -1,11 +1,12 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
+#include <ctime>
 #include "similaridadeCsr.h"
 
 using namespace std;
 
-int **criaMatrizCompras(ListaCompras *lista) {
+int **criaMatrizDensa(ListaCompras *lista) {
     int linhas = lista->vectorClientes.size();
     int colunas = lista->vectorProdutos.size();
 
@@ -176,3 +177,38 @@ void testarSimilaridadeCSR(ListaCompras *lista, int indice){
     }
 
 }
+
+void testarEficienciaCSR(ListaCompras *lista){
+    int clientes = lista->vectorClientes.size();
+
+    // código para a matriz densa padrão
+
+    clock_t inicio = clock();
+    float **padrao = dizSimilaridadeEficiente(lista, ALGORITMO_PADRAO);
+    clock_t fim = clock();
+    double tempoPadrao = double(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Algoritmo padrao:    %.3f segundos\n", tempoPadrao);
+    liberdadeMatrizFloat(padrao, clientes);
+
+    // código para a matriz densa adaptada
+
+    inicio = clock();
+    float **densa = dizSimilaridadeEficiente(lista, ALGORITMO_ADAPTADO);
+    fim = clock();
+    double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Algoritmo adaptado:  %.3f segundos\n", tempo);
+    liberdadeMatrizFloat(densa, clientes);
+
+    // código para a matriz esparsa
+
+    inicio = clock();
+    int **comprasDensa = criaMatrizDensa(lista);
+    CSR compras = criaComprasCSR(lista, comprasDensa);
+    liberdadeMatrizCompras(comprasDensa, lista);
+    CSR interseccao = criaInterseccaoCSR(compras);
+    CSR similaridade = criaSimilaridadeCSR(compras, interseccao);
+    fim = clock();
+    double tempoCSR = double(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Matriz CSR:   %.3f segundos\n", tempoCSR);
+}
+
