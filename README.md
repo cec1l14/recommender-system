@@ -37,7 +37,7 @@ g++ -std=c++11 -o a.exe src/*.cpp
 .\a.exe 2 <indice> <arquivo.csv>                   
 .\a.exe 3 <k> <cod1> <cod2> <cod3> <arquivo.csv>    
 .\a.exe 4 <arquivo.csv>
-.\a.exe 5 <arquivo.csv>                             
+.\a.exe 5 <indice> <arquivo.csv>                             
 ```
 
 ## Exemplos
@@ -116,19 +116,22 @@ Algoritmo padrao:  0.326 segundos
 Algoritmo adaptado: 0.156 segundos
 ```
 
-### Matriz esparsa (CSR): tempo e memória
+### Matriz esparsa (CSR): similaridade, tempo e memória
 
-Compara a matriz de similaridade construída com o algoritmo padrão, com o adaptado e em formato CSR (que guarda só os valores diferentes de zero), e compara a memória da matriz de compras na forma densa e em CSR.
+Mostra o cliente mais similar ao cliente de índice informado, compara o tempo de construir a matriz de similaridade com o algoritmo padrão, com o adaptado e em formato CSR (que guarda só os valores diferentes de zero), e compara a memória da matriz de compras na forma densa e em CSR.
 
 ```bash
-.\a.exe 5 data\dados_venda_cluster_1.csv
+.\a.exe 5 0 data\dados_venda_cluster_1.csv
 ```
 
 ```
+Cliente mais similar - comparacao
+Cliente mais similar: 1, com similaridade = 0.667
+
 Tempo de execucao - comparacao
-Algoritmo padrao:    0.397 segundos
-Algoritmo adaptado:  0.137 segundos
-Matriz CSR:   0.077 segundos
+Algoritmo padrao:    0.320 segundos
+Algoritmo adaptado:  0.140 segundos
+Matriz CSR:   0.078 segundos
 
 Economia de memoria - comparacao
 Matriz de compras densa: 0.521 MB
