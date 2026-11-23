@@ -15,8 +15,7 @@ int **criaMatrizDensa(ListaCompras *lista);
 CSR criaComprasCSR(ListaCompras *lista, int **matrizComprasDensa);
 CSR criaInterseccaoCSR(const CSR& matrizCompras);
 CSR criaSimilaridadeCSR(const CSR& matrizCompras, const CSR& matrizInterseccao);
-int matchClientesCSR(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista);
-float dizSimilaridadeCSR(const CSR& matrizSimilaridade, int clienteA, int clienteB);
+pair<int, float> matchClientesCSR(const CSR& matrizSimilaridade, int cliente, ListaCompras *lista);
 void liberdadeMatrizCompras(int **matrizComprasDensa, ListaCompras *lista);
 void testarSimilaridadeCSR(ListaCompras *lista, int indice);
 
