@@ -1,3 +1,11 @@
+/****
+ * Implementação do módulo: main
+ * Autores: Cecília Candeia e Matheus Fernandes
+ * Data de Criação: 12/11/2026
+ * Última alteração: 23/11/2026
+ * Descrição Geral: contém a matemática para cálculo de similaridade entre clientes, criação de matrizes de compras, transposta, interseção e similaridade, além de funções auxiliares para gerenciamento de memória.
+ ****/
+
 #include <vector>
 #include <cstdlib>
 #include <iostream>
