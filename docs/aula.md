@@ -94,3 +94,10 @@ compila-se o setup
 make_tuple
 
 main com o if name, usando argv, e pegando a funcao de leitura de arquivo do arquivo de leitura.
+
+
+melhorias sugeridas pelo professor: 
+
+- retirar os defines do similaridade.cpp
+- chamar a similaridadeCSR em recomendação.cpp
+- move() nas funções csr
