@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
         testarEficiencia(&lista);
     } else if (opcao == 5){
         printf("Cliente mais similar - comparacao\n");
-        testarSimilaridade(&lista, atoi(argv[2]));
+        testarSimilaridadeCSR(&lista, atoi(argv[2]));
         printf("\n");
 
         printf("Tempo de execucao - comparacao\n");
