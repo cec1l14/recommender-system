@@ -1,8 +1,7 @@
 #ifndef SIMILARIDADE_H
 #define SIMILARIDADE_H
 
-#define ALGORITMO_PADRAO 0
-#define ALGORITMO_ADAPTADO 1
+enum { ALGORITMO_PADRAO, ALGORITMO_ADAPTADO };
 
 #include "listaCompras.h"   
 
